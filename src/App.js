@@ -1,23 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from 'react'
 
-function App() {
+
+const App=()=> {
+  const[data,setData]=useState({
+    
+    username:'',
+    email:'',
+    password:'',
+    confirmPassword:''
+  })
+  const {username,email,password,confirmPassword}=data;
+  const changeHandler=e=>{
+
+    setData({...data,[e.target.name]:e.target.value})
+  }
+const submitHandler=e=>{
+  e.preventDefault();
+if(password===confirmPassword){
+  console.log(data);
+}
+else{
+  console.log("Passwords are not matching...")
+}
+ 
+}
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <center>
+      <form onSubmit={submitHandler}>
+
+<input type="text" name="username" value={username} onChange={changeHandler}/><br></br>
+<input type="email" name="email" value={email}  onChange={changeHandler}/><br></br>
+<input type="password" name="password" value={password}  onChange={changeHandler}/><br></br>
+<input type="confirmPassword" name="confirmPassword" value={confirmPassword}  onChange={changeHandler}/><br></br>
+<input type="submit" name="submit" /><br></br>
+
+      </form>
+
+      </center>
     </div>
   );
 }
